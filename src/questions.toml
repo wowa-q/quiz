@@ -1,7 +1,9 @@
 # questions.toml
+[python]
+label = "Python"
 
 # this is an array of tables
-[[questions]]
+[[python.questions]]
 question = "When does __name__ == '__main__' equal True in a Python file"
 answers = ["When the file is run as a script"]
 alternatives = ["When the file is imported as a module",
@@ -9,33 +11,33 @@ alternatives = ["When the file is imported as a module",
                 "When the file only has one function",
 ]
 
-[[questions]]
+[[python.questions]]
 question = "Which version of Python is the first with TOML support built in"
 answers = ["3.11"]
 alternatives = ["3.9", "3.10", "3.12"]
 
-[[questions]]
+[[python.questions]]
 question = "When was the first known use of the word 'quiz'"
 answers = ["1781"]
 alternatives = ["1771", "1871", "1881"]
 
-[[questions]]
+[[python.questions]]
 question = "Which built-in function can get information from the user"
 answers = ["input"]
 alternatives = ["get", "print", "write"]
 
-[[questions]]
+[[python.questions]]
 question = "Which keyword do you use to loop over a given list of elements"
 answers = ["for"]
 alternatives = ["while", "each", "loop"]
 
-[[questions]]
+[[python.questions]]
 question = "What's the purpose of the built-in zip() function"
 answers = ["To iterate over two or more sequences at the same time"]
 alternatives = ["To combine several strings into one",
                 "To compress several files into one archive",
                 "To get information from the user"]
-[[questions]]
+[[python.questions]]
 question = "What's one effect of calling renadmo.seed(42)"
 answers = ["The random numbers are reproduceable"]
 alternatives = ["The random numbers are more random",
@@ -45,7 +47,7 @@ explanation = """
     bla bla 
 """
 
-[[questions]]
+[[python.questions]]
 question = "What is django?"
 answers = ["A python web framework"]
 alternatives = ["A movie",
@@ -55,12 +57,12 @@ explanation = """
     bla bla 
 """
 
-[[questions]]
+[[python.questions]]
 question = "What's the name of the list-like data structure in TOML"
 answers = ["Array"]
 alternatives = ["List", "Sequence", "Set"]
 
-[[questions]]
+[[python.questions]]
 question = "How can you run a Python script named quiz.py"
 answers = ["python quiz.py", "python -m quiz"]
 alternatives = ["python quiz", "python -m quiz.py"]
@@ -69,7 +71,7 @@ explanation = """
     bla bla 
 """
 
-[[questions]]
+[[python.questions]]
 question = "What's a PEP"
 answers = ["A Python Enhancement Proposal"]
 alternatives = [
@@ -85,7 +87,7 @@ explanation = """
     document design decisions made about the language.
 """
 
-[[questions]]
+[[python.questions]]
 question = "How can you add a docstring to a function"
 answers = [
     "By writing a string literal as the first statement in the function",
@@ -104,4 +106,42 @@ explanation = """
 
     There is no built-in @docstring decorator. Many functions naturally return
     strings. Such a feature can therefore not be used for docstrings.
+"""
+[[python.questions]]
+question = "When was the first public version of Python released?"
+answers = ["February 1991"]
+alternatives = ["January 1994", "October 2000", "December 2008"]
+hint = "The first public version was labeled version 0.9.0."
+explanation = """
+    Guido van Rossum started work on Python in December 1989. He posted
+    Python v0.9.0 to the alt.sources newsgroup in February 1991. Python
+    reached version 1.0.0 in January 1994. The next major versions,
+    Python 2.0 and Python 3.0, were released in October 2000 and December
+    2008, respectively.
+"""
+
+[capitals]
+label = "Capitals"
+
+[[capitals.questions]]
+question = "What's the capital of Norway"
+answers = ["Oslo"]
+hint = "Lars Onsager, Jens Stoltenberg, Trygve Lie, and Børge Ousland."
+alternatives = ["Stockholm", "Copenhagen", "Helsinki", "Reykjavik"]
+explanation = """
+    Oslo was founded as a city in the 11th century and established as a
+    trading place. It became the capital of Norway in 1299. The city was
+    destroyed by a fire in 1624 and rebuilt as Christiania, named in honor
+    of the reigning king. The city was renamed back to Oslo in 1925.
+"""
+
+[[capitals.questions]]
+question = "What's the state capital of Texas, USA"
+answers = ["Austin"]
+alternatives = ["Harrisburg", "Houston", "Galveston", "Columbia"]
+hint = "SciPy is held there each year."
+explanation = """
+    Austin is named in honor of Stephen F. Austin. It was purpose-built to
+    be the capital of Texas and was incorporated in December 1839. Houston,
+    Harrisburg, Columbia, and Galveston are all earlier capitals of Texas.
 """

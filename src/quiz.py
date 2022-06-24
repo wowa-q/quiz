@@ -14,7 +14,20 @@ def prepare_questions(path, num_questions):
     @num_questions is the number of questions
     '''
     # read the text form toml and parse it into a dict
-    questions = tomli.loads(path.read_text())["questions"]
+    topic_info = tomli.loads(path.read_text())
+    # get get all question from the toml file, labeled by the topic label
+    # topics is a dict with "label":"question" pairs
+    topics = {
+        topic["label"]: topic["questions"] for topic in topic_info.values()
+    }
+    # use the helper function to ask which topic is to use - only one answer is possible
+    topic_label = get_answers(
+        question="Which topic do you want to be quizzed about",
+        # sort the dict by topic
+        alternatives=sorted(topics),
+    )[0]
+    questions = topics[topic_label]
+
     num_questions = min(num_questions,len(questions))
     return random.sample(list(questions), k=num_questions)
 
