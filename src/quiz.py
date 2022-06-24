@@ -4,31 +4,31 @@ import tomli
 import pathlib
 from string import ascii_lowercase  #ascii_lowercase to get letters that label the answer alternatives
 
-NUM_QUESTIONS_PER_QUIZ = 50
+NUM_QUESTIONS_PER_QUIZ = 5
 # with __file__ parameter starts to search in the same directory as quiz.py
 QUESTIONS_PATH = pathlib.Path(__file__).parent / "questions.toml"
-# read the text form toml and parse it into a dict
-QUESTIONS = tomli.loads(QUESTIONS_PATH.read_text())
 
-def prepare_questions(questions, num_questions):
+def prepare_questions(path, num_questions):
     '''
-    @questions is the data structure containing the questions
+    @path path to the TOML file with the questions
     @num_questions is the number of questions
     '''
+    # read the text form toml and parse it into a dict
+    questions = tomli.loads(path.read_text())["questions"]
     num_questions = min(num_questions,len(questions))
-    return random.sample(list(questions.items()), k=num_questions)
+    return random.sample(list(questions), k=num_questions)
 
-def ask_question(question, alternatives):
+def ask_question(question):
     ''' 
     Helper function, which is called in the main loop to ask a question
     '''
-    # the first answer in the list of alternatives is correct
-    correct_answer = alternatives[0]
+    correct_answer = question["answer"]
+    alternatives = [question["answer"]] + question["alternatives"]
     # the answers will be returned in a random order random.sample creates new list
     # instead of random.shuffle would shuffle the values inside of the existing list
     ordered_alternatives = random.sample(alternatives, k=len(alternatives))
 
-    answer = get_answer(question, ordered_alternatives)
+    answer = get_answer(question["question"], ordered_alternatives)
     if answer == correct_answer:
         print("⭐ Correct! ⭐")
         return 1
@@ -59,11 +59,11 @@ def run_quiz():
     ''' 
     Is the main loop of the quiz.
     '''
-    questions = prepare_questions(QUESTIONS, num_questions=NUM_QUESTIONS_PER_QUIZ)
+    questions = prepare_questions(QUESTIONS_PATH, num_questions=NUM_QUESTIONS_PER_QUIZ)
     num_correct = 0
-    for num, (question, alternatives) in enumerate(questions, start=1):
+    for num, question in enumerate(questions, start=1):
         print(f"\nQuestion {num}:")
-        num_correct += ask_question(question, alternatives)
+        num_correct += ask_question(question)
 
     print(f"\ You got {num_correct} correct out of {num} questions")
     
