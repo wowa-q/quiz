@@ -1,37 +1,14 @@
 ''' executed Step 2, continue with step 3'''
 import random
+import tomli
+import pathlib
 from string import ascii_lowercase  #ascii_lowercase to get letters that label the answer alternatives
 
-NUM_QUESTIONS_PER_QUIZ = 5
-QUESTIONS = {
-    "When was the first known use of the word 'quiz'": [
-        "1781", "1771", "1871", "1881"
-    ],
-    "Which built-in function can get information from the user": [
-        "input", "get", "print", "write"
-    ],
-    "Which keyword do you use to loop over a given list of elements": [
-        "for", "while", "each", "loop"
-    ],
-    "What's the purpose of the built-in zip() function": [
-        "To iterate over two or more sequences at the same time",
-        "To combine several strings into one",
-        "To compress several files into one archive",
-        "To get information from the user",
-    ],
-    "What's one effect of calling renadmo.seed(42)": [
-        "The random numbers are reproduceable",
-        "The random numbers are more random",
-        "The computer clock is reset",
-        "The first random number is always 42",
-    ],
-    "When does __name__ == '__main__' equal True in a python file": [
-        "When the file is run as a script",
-        "When the file is imported as a module",
-        "When the file has a valid name",
-        "When the file only has one function",
-    ]
-}
+NUM_QUESTIONS_PER_QUIZ = 50
+# with __file__ parameter starts to search in the same directory as quiz.py
+QUESTIONS_PATH = pathlib.Path(__file__).parent / "questions.toml"
+# read the text form toml and parse it into a dict
+QUESTIONS = tomli.loads(QUESTIONS_PATH.read_text())
 
 def prepare_questions(questions, num_questions):
     '''
@@ -90,6 +67,6 @@ def run_quiz():
 
     print(f"\ You got {num_correct} correct out of {num} questions")
     
-    
+
 if __name__ == "__main__":
     run_quiz()
