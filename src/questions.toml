@@ -3,12 +3,12 @@
 # this is an array of tables
 [[questions]]
 question = "Which version of Python is the first with TOML support built in"
-answer = "3.11"
+answers = ["3.11"]
 alternatives = ["3.9", "3.10", "3.12"]
 
 [[questions]]
 question = "When does __name__ == '__main__' equal True in a Python file"
-answer = "When the file is run as a script"
+answers = ["When the file is run as a script"]
 alternatives = ["When the file is imported as a module",
                 "When the file has a valid name",
                 "When the file only has one function",
@@ -16,45 +16,52 @@ alternatives = ["When the file is imported as a module",
 
 [[questions]]
 question = "Which version of Python is the first with TOML support built in"
-answer = "3.11"
+answers = ["3.11"]
 alternatives = ["3.9", "3.10", "3.12"]
 
 [[questions]]
 question = "When was the first known use of the word 'quiz'"
-answer = "1781"
+answers = ["1781"]
 alternatives = ["1771", "1871", "1881"]
 
 [[questions]]
 question = "Which built-in function can get information from the user"
-answer = "input"
+answers = ["input"]
 alternatives = ["get", "print", "write"]
 
 [[questions]]
 question = "Which keyword do you use to loop over a given list of elements"
-answer = "for"
+answers = ["for"]
 alternatives = ["while", "each", "loop"]
 
 [[questions]]
 question = "What's the purpose of the built-in zip() function"
-answer = "To iterate over two or more sequences at the same time"
+answers = ["To iterate over two or more sequences at the same time"]
 alternatives = ["To combine several strings into one",
                 "To compress several files into one archive",
                 "To get information from the user"]
 [[questions]]
 question = "What's one effect of calling renadmo.seed(42)"
-answer = "The random numbers are reproduceable"
+answers = ["The random numbers are reproduceable"]
 alternatives = ["The random numbers are more random",
                 "The computer clock is reset",
                 "The first random number is always 42"]
 
 [[questions]]
 question = "What is django?"
-answer = "A python web framework"
+answers = ["A python web framework"]
 alternatives = ["A movie",
                 "A candy",
                 "nothing"]
 
+
+
 [[questions]]
 question = "What's the name of the list-like data structure in TOML"
-answer = "Array"
+answers = ["Array"]
 alternatives = ["List", "Sequence", "Set"]
+
+[[questions]]
+question = "How can you run a Python script named quiz.py"
+answers = ["python quiz.py", "python -m quiz"]
+alternatives = ["python quiz", "python -m quiz.py"]

@@ -22,38 +22,64 @@ def ask_question(question):
     ''' 
     Helper function, which is called in the main loop to ask a question
     '''
-    correct_answer = question["answer"]
-    alternatives = [question["answer"]] + question["alternatives"]
+    correct_answers = question["answers"]
+    alternatives = question["answers"] + question["alternatives"]
     # the answers will be returned in a random order random.sample creates new list
     # instead of random.shuffle would shuffle the values inside of the existing list
     ordered_alternatives = random.sample(alternatives, k=len(alternatives))
 
-    answer = get_answer(question["question"], ordered_alternatives)
-    if answer == correct_answer:
+    answers = get_answers(
+        question=question["question"], 
+        alternatives=ordered_alternatives, 
+        num_choices=len(correct_answers))
+
+    if set(answers) == set(correct_answers):
         print("⭐ Correct! ⭐")
         return 1
-    else: 
-        print(f"The answer is {correct_answer!r} not {answer!r}")
+    else:
+        is_or_are = " is" if len(correct_answers) == 1 else "s are"
+        print("\n- ".join([f"No, the answer {is_or_are}:"] + correct_answers))
         return 0
 
-def get_answer(question, alternatives):
-    ''' 
-    Another heloer function
-    @question is the question text
+def get_answers(question, alternatives, num_choices=1):
+    """
+    Another helper function
+    @question is the question item from question.toml
     @alternatives is a list of alternatives
-    '''
+    @num_choices is the number of correct answers
+    returns a list of strings
+    """
     print(f"{question}?")
-    # combine letters and alternatives with zip() and store them sorted in a dictionary 
-    # random is mixing the values in the list of labeled alternatives before it will be ziped - see ask_question()
+    # combine letters and alternatives with zip() and store them in a dictionary 
     labeled_alternatives = dict(zip(ascii_lowercase, alternatives))
     # dispays the alternatives with the labels (they were ziped)
     for label, alternative in labeled_alternatives.items():
-        print(f"  {label}) {alternative}")
-    
-    while (answer_label := input("\nChoice? ")) not in labeled_alternatives:
-        print(f"Please answer one of {', '.join(labeled_alternatives)}")
+        print(f" {label}) {alternative} ")
 
-    return labeled_alternatives[answer_label]
+    while True:
+        # put the answers into plural_s for further checks
+        plural_s = "" if num_choices == 1 else f"s (choose {num_choices})"
+        answer = input(f"\nChoice{plural_s}? ")
+        # put answers to a set to quickly ignore duplicate alternatives. An answer string like "a, b, a" is interpreted as {"a", "b"}.
+        answers = set(answer.replace(",", " ").split())
+
+        # handle invalid answers
+        # check the given number of answers compared to choices 
+        if len(answers) != num_choices:
+            plural_s = "" if num_choices == 1 else "s, separated by comma"
+            print(f"Please answer {num_choices} alternative{plural_s}")
+            continue
+        # check if the given answers are contained in the labels
+        if any(
+            (invalid := answer) not in labeled_alternatives
+            for answer in answers
+        ):
+            print(
+                f"{invalid!r} is not valid choice. "
+                f"please use {', '.join(labeled_alternatives)}"
+            )
+            continue
+        return [labeled_alternatives[answer] for answer in answers]
 
 def run_quiz():
     ''' 
