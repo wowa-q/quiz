@@ -31,17 +31,22 @@ def ask_question(question):
     answers = get_answers(
         question=question["question"], 
         alternatives=ordered_alternatives, 
-        num_choices=len(correct_answers))
-
-    if set(answers) == set(correct_answers):
+        num_choices=len(correct_answers),
+        hint=question.get("hint"), # use get, since not all questions have a hint and avoid key error
+    )
+    if correct := set(answers) == set(correct_answers):
         print("⭐ Correct! ⭐")
-        return 1
+        
     else:
         is_or_are = " is" if len(correct_answers) == 1 else "s are"
         print("\n- ".join([f"No, the answer {is_or_are}:"] + correct_answers))
-        return 0
+        
+    if "explanation" in question:
+        print(f"\nEXPLANATION: \n{question['explanation']}")
+    
+    return 1 if correct else 0
 
-def get_answers(question, alternatives, num_choices=1):
+def get_answers(question, alternatives, num_choices=1, hint=None):
     """
     Another helper function
     @question is the question item from question.toml
@@ -52,6 +57,10 @@ def get_answers(question, alternatives, num_choices=1):
     print(f"{question}?")
     # combine letters and alternatives with zip() and store them in a dictionary 
     labeled_alternatives = dict(zip(ascii_lowercase, alternatives))
+    # add a label for a hint
+    if hint:
+        labeled_alternatives["?"] = "hint"
+
     # dispays the alternatives with the labels (they were ziped)
     for label, alternative in labeled_alternatives.items():
         print(f" {label}) {alternative} ")
@@ -62,6 +71,10 @@ def get_answers(question, alternatives, num_choices=1):
         answer = input(f"\nChoice{plural_s}? ")
         # put answers to a set to quickly ignore duplicate alternatives. An answer string like "a, b, a" is interpreted as {"a", "b"}.
         answers = set(answer.replace(",", " ").split())
+        # handle hints
+        if hint and "?" in answers:
+            print(f"\nHINT: {hint}")
+            continue
 
         # handle invalid answers
         # check the given number of answers compared to choices 

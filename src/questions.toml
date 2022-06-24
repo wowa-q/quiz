@@ -2,11 +2,6 @@
 
 # this is an array of tables
 [[questions]]
-question = "Which version of Python is the first with TOML support built in"
-answers = ["3.11"]
-alternatives = ["3.9", "3.10", "3.12"]
-
-[[questions]]
 question = "When does __name__ == '__main__' equal True in a Python file"
 answers = ["When the file is run as a script"]
 alternatives = ["When the file is imported as a module",
@@ -46,6 +41,9 @@ answers = ["The random numbers are reproduceable"]
 alternatives = ["The random numbers are more random",
                 "The computer clock is reset",
                 "The first random number is always 42"]
+explanation = """
+    bla bla 
+"""
 
 [[questions]]
 question = "What is django?"
@@ -53,8 +51,9 @@ answers = ["A python web framework"]
 alternatives = ["A movie",
                 "A candy",
                 "nothing"]
-
-
+explanation = """
+    bla bla 
+"""
 
 [[questions]]
 question = "What's the name of the list-like data structure in TOML"
@@ -65,3 +64,44 @@ alternatives = ["List", "Sequence", "Set"]
 question = "How can you run a Python script named quiz.py"
 answers = ["python quiz.py", "python -m quiz"]
 alternatives = ["python quiz", "python -m quiz.py"]
+hint = "One option uses the filename, and the other uses the module name."
+explanation = """
+    bla bla 
+"""
+
+[[questions]]
+question = "What's a PEP"
+answers = ["A Python Enhancement Proposal"]
+alternatives = [
+    "A Pretty Exciting Policy",
+    "A Preciously Evolved Python",
+    "A Potentially Epic Prize",
+    ]
+hint = "PEPs are used to evolve Python."
+explanation = """
+    Python Enhancement Proposals (PEPs) are design documents that provide
+    information to the Python community. PEPs are used to propose new features
+    for the Python language, to collect community input on an issue, and to
+    document design decisions made about the language.
+"""
+
+[[questions]]
+question = "How can you add a docstring to a function"
+answers = [
+    "By writing a string literal as the first statement in the function",
+    "By assigning a string to the function's .__doc__ attribute",
+]
+alternatives = [
+    "By using the built-in @docstring decorator",
+    "By returning a string from the function",
+]
+hint = "They're parsed from your code and stored on the function object."
+explanation = """
+    Docstrings document functions and other Python objects. A docstring is a
+    string literal that occurs as the first statement in a module, function,
+    class, or method definition. Such a docstring becomes the .__doc__ special
+    attribute of that object. See PEP 257 for more information.
+
+    There is no built-in @docstring decorator. Many functions naturally return
+    strings. Such a feature can therefore not be used for docstrings.
+"""
