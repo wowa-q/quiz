@@ -1,6 +1,6 @@
 ''' executed Step 2, continue with step 3'''
 import random
-import tomli
+import tomli    # package to process toml files
 import pathlib
 from string import ascii_lowercase  #ascii_lowercase to get letters that label the answer alternatives
 
@@ -15,7 +15,7 @@ def prepare_questions(path, num_questions):
     '''
     # read the text form toml and parse it into a dict
     topic_info = tomli.loads(path.read_text())
-    # get get all question from the toml file, labeled by the topic label
+    # get all question from the toml file, labeled by the topic label
     # topics is a dict with "label":"question" pairs
     topics = {
         topic["label"]: topic["questions"] for topic in topic_info.values()
